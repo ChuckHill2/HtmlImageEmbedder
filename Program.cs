@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -39,6 +39,7 @@ namespace HtmlImageEmbedder
                  if (f.StartsWith("data:")) return value; //already embedded
 
                  f = WebUtility.UrlDecode(f);
+                 if (f.StartsWith("file://")) f = new Uri(f).LocalPath;
                  if (!File.Exists(f))
                  {
                      Console.WriteLine($"Warning: Image File \"{f}\" not found. Ignored.");
